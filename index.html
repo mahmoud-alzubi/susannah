@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Susannah Al Fraihat — Writer &amp; Playwright</title>
+<meta name="description" content="Susannah Al Fraihat is an Irish-Arab writer and playwright based in Dublin, Ireland.">
+<meta name="color-scheme" content="light dark">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter+Tight:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="birthday.css">
+
+<script>
+  /* Apply the stored theme before first paint to avoid a flash. */
+  try {
+    var t = localStorage.getItem('theme');
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+
+<header id="navbar">
+  <div class="nav-inner">
+    <a href="#home" class="logo">
+      <span class="logo-mark" aria-hidden="true">SA</span>
+      <span class="logo-text">Susannah <em>Al&nbsp;Fraihat</em></span>
+    </a>
+
+    <nav class="nav-links" id="nav-links" aria-label="Primary">
+      <a href="#about" class="nav-link">About</a>
+      <a href="#works" class="nav-link">Works</a>
+      <a href="#press" class="nav-link">Press</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button id="theme-toggle" class="icon-btn" aria-label="Switch colour theme" aria-pressed="false">
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M22 12h-2.6M4.6 12H2M19.07 4.93l-1.84 1.84M6.77 17.23l-1.84 1.84M19.07 19.07l-1.84-1.84M6.77 6.77 4.93 4.93"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2z"/></svg>
+      </button>
+      <button id="bday-replay" class="icon-btn" aria-label="Replay the birthday message" title="Replay the birthday message">🎂</button>
+      <button id="hamburger" class="icon-btn burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section id="home" class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+
+    <div class="hero-inner">
+      <p class="eyebrow" data-anim><span class="dot" aria-hidden="true"></span>Writer &amp; Playwright — Dublin</p>
+
+      <h1 class="hero-title">
+        <span class="line"><span class="line-in">Susannah</span></span>
+        <span class="line"><span class="line-in"><em>Al&nbsp;Fraihat</em></span></span>
+      </h1>
+
+      <div class="hero-bottom">
+        <p class="hero-desc" data-anim>
+          An Irish-Arab writer telling stories that sit at the crossing of two
+          cultures — migration, misunderstanding, and the strange, tender fruit
+          that grows in between.
+        </p>
+
+        <div class="hero-side" data-anim>
+          <div class="stat"><b>★★★★</b><span>Binge Fringe, <em>Forbidden Fruit</em></span></div>
+          <div class="stat"><b>2025</b><span>Axis Assemble artist</span></div>
+        </div>
+      </div>
+
+      <div class="hero-buttons" data-anim>
+        <a href="#works" class="btn btn-primary magnetic">
+          Read my work
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#contact" class="btn btn-ghost magnetic">Get in touch</a>
+      </div>
+    </div>
+
+    <a href="#about" class="scroll-cue" aria-label="Scroll to about">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+    </a>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Fruit for Thought<i>◆</i>Forbidden Fruit<i>◆</i>Theatre for One<i>◆</i>Landmark Productions<i>◆</i>Axis Assemble<i>◆</i>Dublin Fringe<i>◆</i></span>
+      <span>Fruit for Thought<i>◆</i>Forbidden Fruit<i>◆</i>Theatre for One<i>◆</i>Landmark Productions<i>◆</i>Axis Assemble<i>◆</i>Dublin Fringe<i>◆</i></span>
+    </div>
+  </div>
+
+  <section id="about" class="section">
+    <div class="about-grid">
+      <aside class="about-aside">
+        <figure class="photo-frame" data-anim>
+          <span class="photo-fallback" aria-hidden="true">SA</span>
+          <img
+            class="photo"
+            src="images/susannah-headshot.webp"
+            width="650" height="929"
+            alt="Susannah Al Fraihat, writer and playwright"
+            decoding="async">
+        </figure>
+        <ul class="fact-list" data-anim>
+          <li><span>Based</span><b>Dublin, IE</b></li>
+          <li><span>Heritage</span><b>Irish / Jordanian</b></li>
+          <li><span>Now</span><b>Axis Assemble artist</b></li>
+        </ul>
+      </aside>
+
+      <div class="about-text">
+        <span class="section-tag" data-anim>01 — About</span>
+        <h2 data-anim>An Irish-Arab voice for the stage.</h2>
+        <p data-anim>
+          Susannah Al Fraihat is a Dublin-based writer and emerging playwright of
+          Irish and Jordanian heritage. Her work moves between two inheritances,
+          finding the humour, ache, and quiet friction of lives lived between
+          cultures.
+        </p>
+        <p data-anim>
+          Her debut play, <em>Fruit for Thought</em>, was one of six short plays
+          chosen from a nationwide open call for <em>Theatre for One: This
+          Ireland</em> — staged in a one-actor, one-audience-member booth on the
+          plaza outside Cork Opera House, alongside new work by Marina Carr,
+          Stacey Gregg, Emmet Kirwan, Louise Lowe, Mark O’Rowe and Enda Walsh.
+        </p>
+        <p data-anim>
+          She is now an Axis Assemble artist at Axis Ballymun, expanding her
+          <em>Fruit</em> series with <em>Forbidden Fruit</em> — a full-length play
+          that earned four stars at Dublin Fringe 2025.
+        </p>
+        <blockquote class="pull-quote" data-anim>
+          <p>“Al Fraihat eats them up and passes them to us with stunning care.”</p>
+          <cite>Binge Fringe Magazine — on <em>Forbidden Fruit</em>, Dublin Fringe 2025</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section id="works" class="section">
+    <div class="section-head" data-anim>
+      <span class="section-tag">02 — Selected works</span>
+      <h2>Plays &amp; projects</h2>
+    </div>
+
+    <div class="works-list">
+
+      <article class="work" data-anim>
+        <span class="work-index" aria-hidden="true">01</span>
+        <div class="work-main">
+          <div class="work-head">
+            <h3>Forbidden Fruit</h3>
+            <div class="work-tags"><span class="tag">2025—</span><span class="tag tag-live">In development</span></div>
+          </div>
+          <p class="work-venue">Scene + Heard Festival &middot; TenderWRITE Big Plays, Dublin Fringe &middot; Axis Assemble</p>
+          <div class="work-body"><div>
+            <p>
+              The second play in Susannah’s <em>Fruit</em> series. Joe craves more
+              from life after tasting the “exotic” fruit of his migrant neighbour,
+              Aziz; the bond that follows — ripe with humour and tension — turns on
+              cultural misunderstanding, microaggressions, and the stereotypes we
+              outgrow, and the ones we don’t.
+            </p>
+            <p>
+              First seen at the Scene + Heard Festival at Smock Alley in February
+              2025, it returned that September as a 100-minute rehearsed reading in
+              TenderWRITE Big Plays at Dublin Fringe, where Binge Fringe Magazine
+              gave it four stars. It is now being expanded under the Axis Assemble
+              programme at Axis Ballymun.
+            </p>
+          </div></div>
+        </div>
+      </article>
+
+      <article class="work" data-anim>
+        <span class="work-index" aria-hidden="true">02</span>
+        <div class="work-main">
+          <div class="work-head">
+            <h3>Fruit for Thought</h3>
+            <div class="work-tags"><span class="tag">2024</span><span class="tag">Debut</span></div>
+          </div>
+          <p class="work-venue">Theatre for One: This Ireland &mdash; Cork Opera House, Cork Midsummer Festival</p>
+          <div class="work-body"><div>
+            <p>
+              Susannah’s debut, and the first of the <em>Fruit</em> plays. One of
+              six short works selected from a nationwide open call to join six
+              commissions by Marina Carr, Stacey Gregg, Emmet Kirwan, Louise Lowe,
+              Mark O’Rowe and Enda Walsh.
+            </p>
+            <p>
+              Performed by Sarah Agha in a purpose-built booth for a single
+              audience member at a time, on the plaza outside Cork Opera House in
+              June 2024. Produced by Landmark Productions with Octopus Theatricals
+              (New York) and Cork Midsummer Festival; directed by Eoghan Carrick
+              and Grace Morgan.
+            </p>
+          </div></div>
+        </div>
+      </article>
+
+    </div>
+
+    <ul class="programme-list" data-anim>
+      <li><span>2025</span><b>Axis Assemble artist</b><i>Axis Ballymun</i></li>
+      <li><span>2025</span><b>TenderWRITE Big Plays</b><i>The Civic Theatre, Tallaght</i></li>
+      <li><span>2025</span><b>Scene + Heard Festival</b><i>Smock Alley Theatre</i></li>
+      <li><span>2024</span><b>Theatre for One open call</b><i>Landmark Productions</i></li>
+    </ul>
+
+  </section>
+
+  <section id="press" class="section">
+    <div class="section-head" data-anim>
+      <span class="section-tag">03 — In the press</span>
+      <h2>Reviews &amp; mentions</h2>
+    </div>
+
+    <div class="press-grid">
+      <blockquote class="press-card" data-anim>
+        <span class="quote-mark" aria-hidden="true">”</span>
+        <p>Sussanah Al Fraihat is a powderkeg of a writer set to make waves.</p>
+        <cite>Phoebe Bakker &mdash; Binge Fringe Magazine, ★★★★ review of <em>Forbidden Fruit</em>, 22 September 2025</cite>
+        <a class="link-arrow" href="https://www.bingefringe.com/2025/09/22/review-tenderwrite-big-plays-forbidden-fruit-susannah-al-fraihat-dublin-fringe-%E2%98%85%E2%98%85%E2%98%85%E2%98%85/" target="_blank" rel="noopener">
+          Read the full review
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        </a>
+      </blockquote>
+
+      <blockquote class="press-card" data-anim>
+        <span class="quote-mark" aria-hidden="true">”</span>
+        <p>Susannah Al Fraihat will expand her acclaimed &lsquo;Fruit series&rsquo; with <em>Forbidden Fruit</em>, continuing her exploration of migration and cultural identity using humour and metaphor.</p>
+        <cite>Axis Ballymun, announcing the 2025 Assemble artists</cite>
+        <a class="link-arrow" href="https://www.boundlessandbare.com/bnd/2025/8/4/axis-ballymun-announces-2025-assemble-artists-championing-bold-and-diverse-creative-voices" target="_blank" rel="noopener">
+          Read the announcement
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        </a>
+      </blockquote>
+
+      <blockquote class="press-card" data-anim>
+        <span class="quote-mark" aria-hidden="true">”</span>
+        <p>Featured among the emerging playwrights of TenderWRITE, the Civic Theatre’s programme for writers aged 16–24.</p>
+        <cite>Project Arts Centre &mdash; Dublin Fringe Festival 2025</cite>
+        <a class="link-arrow" href="https://projectartscentre.ie/events/tenderwrite-shorts-big-plays/" target="_blank" rel="noopener">
+          View event details
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        </a>
+      </blockquote>
+    </div>
+
+  </section>
+
+  <section id="contact" class="section">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <span class="section-tag" data-anim>04 — Let’s talk</span>
+        <h2 data-anim>Have a story in mind?</h2>
+        <p data-anim>
+          For commissions, collaborations, or production enquiries, drop a note —
+          or find me on Instagram.
+        </p>
+
+        <ul class="contact-list" data-anim>
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+            <span>Dublin, Ireland</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+            <a href="https://www.instagram.com/susannahfraihat/" target="_blank" rel="noopener">@susannahfraihat</a>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3.8 7 8.2 6 8.2-6"/></svg>
+            <a href="mailto:Susannah.alfraihat.2018@gmail.com">Susannah.alfraihat.2018@gmail.com</a>
+          </li>
+        </ul>
+      </div>
+
+      <form id="contact-form" class="contact-form" data-anim novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <input type="text" id="name" name="name" placeholder=" " required>
+            <label for="name">Your name</label>
+            <span class="error-msg" id="name-error"></span>
+          </div>
+          <div class="form-group">
+            <input type="email" id="email" name="email" placeholder=" " required>
+            <label for="email">Your email</label>
+            <span class="error-msg" id="email-error"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" id="subject" name="subject" placeholder=" " required>
+          <label for="subject">Subject</label>
+          <span class="error-msg" id="subject-error"></span>
+        </div>
+        <div class="form-group">
+          <textarea id="message" name="message" rows="5" placeholder=" " required></textarea>
+          <label for="message">Message</label>
+          <span class="error-msg" id="message-error"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary magnetic">
+          Send message
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+
+        <p id="form-success" class="form-success" role="status">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.4 2.7 2.7L16 9.8"/></svg>
+          Thank you — your message has been noted (demo only, no server connected).
+        </p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <p class="footer-name">Susannah <em>Al Fraihat</em></p>
+    <p class="footer-meta">© <span id="year"></span> — Dublin, Ireland</p>
+  </div>
+</footer>
+
+<a href="#home" class="back-to-top" id="back-to-top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+</a>
+
+<div id="bday" class="bday" role="dialog" aria-modal="true" aria-labelledby="bday-title" hidden>
+  <div class="bday-scrim"></div>
+  <div class="bday-fruit" aria-hidden="true"></div>
+
+  <div class="bday-card">
+    <p class="bday-eyebrow">One night only &middot; world premiere</p>
+    <h2 class="bday-title" id="bday-title"><span>Happy</span> <span>Birthday</span></h2>
+    <p class="bday-name">Susannah</p>
+
+    <button class="bday-cake" type="button" aria-label="Blow out the candles">
+      <span class="candles" aria-hidden="true">
+        <span class="candle"><i class="flame"></i></span>
+        <span class="candle"><i class="flame"></i></span>
+        <span class="candle"><i class="flame"></i></span>
+      </span>
+      <span class="cake-top" aria-hidden="true"></span>
+      <span class="cake-body" aria-hidden="true"></span>
+      <span class="cake-plate" aria-hidden="true"></span>
+    </button>
+
+    <p class="bday-hint" role="status"><b>Blow out the candles.</b>Tap the cake.</p>
+    <button class="bday-close" type="button">Skip the fuss</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script src="birthday.js"></script>
+</body>
+</html>
