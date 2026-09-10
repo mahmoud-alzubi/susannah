@@ -32,7 +32,7 @@
 
   /* Layout */
   --wrap: 1180px;
-  --gutter: clamp(20px, 5vw, 56px);
+  --gutter: clamp(22px, 5vw, 56px);
   --radius: 18px;
   --radius-sm: 10px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -348,7 +348,7 @@ h1, h2, h3 {
 .hero-inner { width: 100%; max-width: var(--wrap); margin: 0 auto; }
 
 .hero-title {
-  font-size: clamp(3rem, 10.5vw, 8rem);
+  font-size: clamp(3rem, 12vw, 8rem);
   line-height: 0.94;
   margin: 22px 0 30px;
   letter-spacing: -0.035em;
@@ -636,7 +636,7 @@ h1, h2, h3 {
   gap: 12px 20px;
 }
 .work h3 {
-  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  font-size: clamp(1.75rem, 6vw, 2.6rem);
   transition: transform 0.45s var(--ease);
 }
 .work:hover h3 { transform: translateX(6px); }
@@ -967,8 +967,19 @@ footer {
 
   /* Side-by-side portrait + facts no longer fits: stack them. */
   .about-aside { grid-template-columns: 1fr; gap: 24px; align-items: start; }
-  .photo-frame { max-width: 280px; }
+  /* Portrait, not hero image: keep it to roughly half the column. */
+  .photo-frame { width: min(52%, 240px); max-width: none; }
   .fact-list { margin-top: 0; }
+
+  /* Floating button was landing on top of body copy — tuck it into the corner. */
+  .back-to-top {
+    right: 14px;
+    bottom: 14px;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+  }
+  .back-to-top svg { width: 16px; height: 16px; }
   .work { grid-template-columns: 1fr; gap: 0; }
   .work-index { padding-top: 0; margin-bottom: 6px; }
   .form-row { grid-template-columns: 1fr; }
@@ -978,6 +989,49 @@ footer {
 @media (max-width: 420px) {
   .hero-side { flex-direction: column; gap: 18px; }
   .btn { padding: 14px 22px; }
+}
+
+/* =========================================================
+   Touch devices
+   iOS keeps :hover applied after a tap, so pointer-driven shifts
+   get stuck on. Neutralise the ones that move or repaint layout.
+   Selectors keep the :hover so they match the originals' specificity.
+   ========================================================= */
+
+@media (hover: none) {
+  .work:hover,
+  .work:focus-within { padding-left: clamp(0px, 2vw, 24px); }
+  .work:hover::before,
+  .work:focus-within::before { opacity: 0; }
+  .work:hover h3 { transform: none; }
+  .work:hover .work-index { color: var(--ink-3); }
+  .work:hover .work-body p { color: var(--ink-2); }
+
+  .press-card:hover {
+    transform: none;
+    border-color: var(--line-soft);
+    box-shadow: none;
+  }
+  .programme-list li:hover { background: var(--bg); }
+  .photo-frame:hover .photo { transform: scale(1.001); }
+
+  .btn:hover,
+  .icon-btn:hover,
+  .back-to-top:hover,
+  .bday-close:hover { transform: none; }
+  .btn:hover svg,
+  .link-arrow:hover svg { transform: none; }
+  .btn-primary:hover { color: var(--btn-fg); }
+  .btn-primary:hover::before { transform: translateY(101%); }
+  .logo:hover .logo-mark { transform: none; background: var(--ink); color: var(--bg); }
+  .bday-cake:hover .candle { transform: none; }
+}
+
+/* Narrow screens: let a play title own its line instead of sharing
+   it with the year/status pills. */
+@media (max-width: 560px) {
+  .work-head { display: block; }
+  .work-tags { margin-top: 10px; }
 }
 
 /* =========================================================
