@@ -1034,6 +1034,29 @@ footer {
   .work-tags { margin-top: 10px; }
 }
 
+/* Phones: sit the facts beside the portrait rather than under it, with
+   each label stacked above its value so the pair fits a narrow column.
+   Floored at 360px — below that the column is too tight and it stacks. */
+@media (min-width: 360px) and (max-width: 560px) {
+  .about-aside {
+    grid-template-columns: minmax(0, 44%) minmax(0, 1fr);
+    gap: 18px;
+    align-items: center;
+  }
+  .photo-frame { width: 100%; max-width: none; }
+
+  .fact-list { margin-top: 0; border-top: 0; }
+  .fact-list li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1px;
+    padding: 8px 0;
+  }
+  .fact-list li:first-child { padding-top: 0; }
+  .fact-list li:last-child { border-bottom: 0; }
+  .fact-list b { line-height: 1.35; }
+}
+
 /* =========================================================
    Reduced motion
    ========================================================= */
