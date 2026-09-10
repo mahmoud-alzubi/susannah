@@ -1034,6 +1034,39 @@ footer {
   .work-tags { margin-top: 10px; }
 }
 
+/* Phones: touch ergonomics for the press links and contact form. */
+@media (max-width: 560px) {
+  /* iOS Safari force-zooms the page when a focused field is under 16px.
+     16px keeps the layout still when someone taps into the form. */
+  .form-group input,
+  .form-group textarea,
+  .form-group label { font-size: 16px; }
+
+  /* 30px and 25px links are awkward to hit — grow them to a thumb. */
+  .link-arrow {
+    min-height: 44px;
+    padding-top: 0;
+  }
+  .contact-list li { padding: 2px 0; }
+  .contact-list li > a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 46px;
+  }
+  .contact-list li > span { padding-block: 12px; }
+
+  /* The fixed back-to-top button was covering the copyright line. */
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding-bottom: 36px;
+  }
+
+  /* Long mono citations wrapped three deep; tighten them slightly. */
+  .press-card cite { font-size: 0.66rem; letter-spacing: 0.02em; }
+}
+
 /* Phones: sit the facts beside the portrait rather than under it, with
    each label stacked above its value so the pair fits a narrow column.
    Floored at 360px — below that the column is too tight and it stacks. */
