@@ -180,6 +180,7 @@ h1, h2, h3 {
 .press-card p,
 .contact-lead {
   text-align: justify;
+  -webkit-hyphens: auto; /* Safari only took unprefixed hyphens in 17 */
   hyphens: auto;
 }
 
@@ -334,6 +335,11 @@ h1, h2, h3 {
 }
 .icon-btn:hover { color: var(--ink); border-color: var(--ink-3); transform: translateY(-2px); }
 .icon-btn svg { width: 18px; height: 18px; }
+
+/* The only solid icon in the nav: at 18px a stroked pomegranate reads as a
+   ring with a bow, so this one overrides the global outline svg rule. */
+#fruit-btn svg { fill: currentColor; stroke: none; }
+#fruit-btn[aria-pressed='true'] { color: var(--accent); border-color: var(--accent); }
 
 #theme-toggle { position: relative; overflow: hidden; }
 #theme-toggle svg { position: absolute; transition: transform 0.45s var(--ease), opacity 0.3s var(--ease); }
@@ -993,6 +999,10 @@ footer {
     justify-content: center;
     gap: 6px;
     padding: 0 34px;
+    /* Scroll inside the panel must not chain out to the page behind it. */
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
     background: color-mix(in srgb, var(--bg) 92%, transparent);
     backdrop-filter: blur(20px);
     border-left: 1px solid var(--line-soft);

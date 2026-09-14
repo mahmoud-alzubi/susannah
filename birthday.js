@@ -32,42 +32,34 @@
   const fruitLayer = overlay.querySelector('.bday-fruit');
   const replay = replayBtn;
 
-  const FRUIT = ['🍇', '🍊', '🍋', '🍑', '🍒', '🍓', '🥝', '🍍', '🍎', '🍐', '🥭', '🍌'];
-  // Pomegranates are the favourite, so they fall more often than anything else.
-  // Unicode has no pomegranate, so .pom is a drawn SVG (see birthday.css).
-  const POM_SHARE = 0.35;
-  // How long the card stays up with no interaction. Each tap resets it.
-  const IDLE_CLOSE_MS = 60000;
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const rand = (min, max) => Math.random() * (max - min) + min;
-  const pick = (a) => a[Math.floor(Math.random() * a.length)];
 
-  function makePiece() {
-    const el = document.createElement('i');
-    if (Math.random() < POM_SHARE) el.className = 'pom';
-    else el.textContent = pick(FRUIT);
-    return el;
-  }
+  // The fruit mix and the falling-piece layout live in script.js, so the nav
+  // button can still rain fruit after this file retires itself. Fall back to a
+  // bare piece if script.js is missing, rather than throwing mid-animation.
+  const { makePiece, seedFruit } = window.__fruit ?? {
+    makePiece: () => Object.assign(document.createElement('i'), { className: 'pom' }),
+    seedFruit: () => {},
+  };
 
   let blowAttempts = 0;
-  let autoCloseTimer;
   let lastFocus = null;
+  let isOpen = false;
+  let hideTimer;
+
+  // Shared with the nav menu so the two can't fight over the body's scroll
+  // state; falls back to a local no-op lock if script.js didn't load.
+  const scrollLock = window.__scrollLock ?? {
+    hold() { document.body.style.overflow = 'hidden'; },
+    release() { document.body.style.overflow = ''; },
+  };
 
   /* ---------- Falling fruit ---------- */
 
   function rainFruit(count = 26) {
     if (reduceMotion) return;
-    const frag = document.createDocumentFragment();
-    for (let i = 0; i < count; i++) {
-      const f = makePiece();
-      f.style.left = `${rand(-2, 98)}%`;
-      f.style.setProperty('--size', `${rand(16, 38).toFixed(0)}px`);
-      f.style.setProperty('--dur', `${rand(4.5, 9).toFixed(2)}s`);
-      f.style.setProperty('--delay', `${rand(0, 6).toFixed(2)}s`);
-      f.style.setProperty('--spin', `${rand(-720, 720).toFixed(0)}deg`);
-      frag.appendChild(f);
-    }
-    fruitLayer.replaceChildren(frag);
+    seedFruit(fruitLayer, count);
   }
 
   /* ---------- Fruit burst out of the cake ---------- */
@@ -99,13 +91,7 @@
     hint.classList.add('swap');
   }
 
-  function armAutoClose() {
-    clearTimeout(autoCloseTimer);
-    autoCloseTimer = setTimeout(close, IDLE_CLOSE_MS);
-  }
-
   function blow() {
-    armAutoClose(); // playing with the candles buys another minute
     blowAttempts += 1;
 
     if (blowAttempts === 1) {
@@ -149,24 +135,25 @@
     closeBtn.classList.remove('primary');
     hint.innerHTML = '<b>Blow out the candles.</b>Tap the cake.';
 
+    // Tracked explicitly rather than read off overlay.hidden, which lags the
+    // close by the fade-out — replaying inside that window would otherwise
+    // take the lock twice, or not at all.
+    if (!isOpen) { isOpen = true; scrollLock.hold(); }
+    clearTimeout(hideTimer);   // a replay mid-fade must not be re-hidden
     overlay.hidden = false;
     overlay.classList.remove('closing');
-    document.body.style.overflow = 'hidden';
     rainFruit();
 
     setTimeout(() => closeBtn.focus({ preventScroll: true }), 400);
-
-    // Never hold the site hostage forever if nobody plays along.
-    armAutoClose();
   }
 
   function close() {
-    clearTimeout(autoCloseTimer);
-    if (overlay.hidden) return;
+    if (!isOpen) return;
+    isOpen = false;
     overlay.classList.add('closing');
-    document.body.style.overflow = '';
+    scrollLock.release();
 
-    setTimeout(() => {
+    hideTimer = setTimeout(() => {
       overlay.hidden = true;
       overlay.classList.remove('closing');
       fruitLayer.replaceChildren();

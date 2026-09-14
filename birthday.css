@@ -274,7 +274,25 @@
   pointer-events: none;
   overflow: hidden;
 }
-.bday-fruit i {
+/* Two layers share these primitives: the card's own rain, and .fruit-rain —
+   the site-wide version behind the nav button. Kept here, beside the drawn
+   pomegranate, so there is one definition of what falling fruit looks like.
+   .fruit-rain outlives the birthday gag's retirement date; birthday.css is
+   always loaded, so the styles survive even when birthday.js bails early. */
+
+.fruit-rain {
+  position: fixed;
+  inset: 0;
+  z-index: 950;            /* over the grain (900), under the navbar (1000) */
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.8s var(--ease, ease);
+}
+.fruit-rain.out { opacity: 0; }
+
+.bday-fruit i,
+.fruit-rain i {
   position: absolute;
   top: -8vh;
   font-size: var(--size, 26px);
@@ -292,7 +310,8 @@
 
 /* Pomegranate — her favourite, and there is no emoji for it, so it is drawn. */
 .bday-fruit i.pom,
-.bday-burst i.pom {
+.bday-burst i.pom,
+.fruit-rain i.pom {
   width: var(--size, 26px);
   height: var(--size, 26px);
   font-size: 0;
@@ -340,6 +359,7 @@
     transform: none;
   }
   .flame { animation: none; }
-  .bday-fruit { display: none; }
+  .bday-fruit,
+  .fruit-rain { display: none; }   /* JS also removes the nav button */
   .bday-burst i { animation-duration: 0.001ms; }
 }
