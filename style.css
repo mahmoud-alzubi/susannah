@@ -1034,32 +1034,17 @@ footer {
     align-items: start;
   }
   .hero-title { font-size: clamp(2.6rem, 13vw, 4.4rem); margin: 18px 0 26px; }
-  /* Full width is enough for the rail's own two-up split: description on
-     the left, the credentials stacked in a narrow column on the right. */
   .hero-aside {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(104px, 32%);
-    gap: 22px clamp(16px, 4vw, 24px);
-    align-items: start;
+    gap: 22px;
     padding-left: 0;
     padding-top: 30px;
     padding-bottom: 0;
     border-left: 0;
     border-top: 1px solid var(--line-soft);
   }
-  .hero-desc { font-size: clamp(0.88rem, 2.6vw, 1rem); }
-  /* The rule the desktop rail used to sit behind, now dividing the two
-     columns. align-self:stretch overrides the grid's align-items:start so
-     it runs the full height of the row, not just the stats' own height;
-     matching gap and padding-left centre it in the gutter. */
-  .hero-side {
-    gap: 14px;
-    align-self: stretch;
-    padding-left: clamp(16px, 4vw, 24px);
-    border-left: 1px solid var(--line-soft);
-  }
-  .stat b { font-size: 1.25rem; }
-  .stat span { font-size: 0.6rem; letter-spacing: 0.07em; }
+  .hero-desc { font-size: 1rem; }
+  .hero-side { gap: 14px; }
+  .stat b { font-size: 1.5rem; }
   .hero-buttons { margin-top: 26px; gap: 10px; }
 }
 
@@ -1069,13 +1054,6 @@ footer {
   /* Grid is already stacked here; only the type needs to come down. */
   .hero-title { font-size: clamp(2.2rem, 12vw, 3.2rem); }
   .hero-buttons .btn { padding: 12px 18px; font-size: 0.84rem; }
-
-  /* Narrowest the rail's two columns can go before the credential
-     captions start breaking mid-word. */
-  .hero-aside { grid-template-columns: minmax(0, 1fr) minmax(96px, 34%); gap: 20px 14px; }
-  .hero-side { padding-left: 14px; }
-  .stat b { font-size: 1.15rem; }
-  .stat span { font-size: 0.56rem; }
 }
 
 /* =========================================================
