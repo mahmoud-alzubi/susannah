@@ -170,6 +170,19 @@ h1, h2, h3 {
   letter-spacing: -0.02em;
 }
 
+/* Justified body copy. Scoped to running prose only — labels, mono credit
+   lines, cites and the centred birthday card keep their own alignment.
+   hyphens:auto (needs the lang="en" on <html>) lets the browser break words
+   rather than opening rivers of space in the narrower columns. */
+.hero-desc,
+.about-text > p,
+.work-body p,
+.press-card p,
+.contact-lead {
+  text-align: justify;
+  hyphens: auto;
+}
+
 .section-tag {
   display: inline-block;
   font-family: var(--font-mono);
@@ -957,13 +970,12 @@ footer {
   .about-grid { grid-template-columns: 1fr; }
   .about-aside { position: static; display: grid; grid-template-columns: 200px 1fr; gap: 28px; align-items: center; }
   .fact-list { margin-top: 0; }
-  .hero-grid { grid-template-columns: 1fr; align-items: start; }
-  .hero-aside {
-    border-left: 0;
-    padding-left: 0;
-    padding-top: 22px;
-    border-top: 1px solid var(--line-soft);
-  }
+
+  /* Tablet still has room for the desktop split, just tighter: title + CTA
+     on the left, the ruled rail on the right. It stacks at 760px. */
+  .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(190px, 34%); }
+  .hero-aside { padding-left: clamp(18px, 2.4vw, 28px); }
+  .stat b { font-size: 1.6rem; }
 }
 
 @media (max-width: 760px) {
@@ -1011,10 +1023,59 @@ footer {
   .work { grid-template-columns: 1fr; gap: 0; padding: 26px 22px; }
   .work-index { justify-content: flex-start; padding-top: 0; margin-bottom: 6px; }
   .press-card { padding: 30px 26px 26px; }
+
+  /* Two columns squeeze the title into a sliver of the width: stack them.
+     Title + CTA first, then the rail becomes a full-width block, its
+     vertical rule rotated into a top rule to keep the same division. */
+  .hero { padding-bottom: 92px; }
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 34px;
+    align-items: start;
+  }
+  .hero-title { font-size: clamp(2.6rem, 13vw, 4.4rem); margin: 18px 0 26px; }
+  /* Full width is enough for the rail's own two-up split: description on
+     the left, the credentials stacked in a narrow column on the right. */
+  .hero-aside {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(104px, 32%);
+    gap: 22px clamp(16px, 4vw, 24px);
+    align-items: start;
+    padding-left: 0;
+    padding-top: 30px;
+    padding-bottom: 0;
+    border-left: 0;
+    border-top: 1px solid var(--line-soft);
+  }
+  .hero-desc { font-size: clamp(0.88rem, 2.6vw, 1rem); }
+  /* The rule the desktop rail used to sit behind, now dividing the two
+     columns. align-self:stretch overrides the grid's align-items:start so
+     it runs the full height of the row, not just the stats' own height;
+     matching gap and padding-left centre it in the gutter. */
+  .hero-side {
+    gap: 14px;
+    align-self: stretch;
+    padding-left: clamp(16px, 4vw, 24px);
+    border-left: 1px solid var(--line-soft);
+  }
+  .stat b { font-size: 1.25rem; }
+  .stat span { font-size: 0.6rem; letter-spacing: 0.07em; }
+  .hero-buttons { margin-top: 26px; gap: 10px; }
 }
 
 @media (max-width: 420px) {
   .btn { padding: 14px 22px; }
+
+  /* Grid is already stacked here; only the type needs to come down. */
+  .hero-title { font-size: clamp(2.2rem, 12vw, 3.2rem); }
+  .hero-buttons .btn { padding: 12px 18px; font-size: 0.84rem; }
+
+  /* Narrowest the rail's two columns can go before the credential
+     captions start breaking mid-word. */
+  .hero-aside { grid-template-columns: minmax(0, 1fr) minmax(96px, 34%); gap: 20px 14px; }
+  .hero-side { padding-left: 14px; }
+  .stat b { font-size: 1.15rem; }
+  .stat span { font-size: 0.56rem; }
 }
 
 /* =========================================================
