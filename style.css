@@ -240,6 +240,8 @@ h1, h2, h3 {
   gap: 20px;
 }
 
+.brand { display: inline-flex; align-items: center; gap: 10px; }
+
 .logo { display: inline-flex; align-items: center; gap: 12px; }
 .logo-mark {
   display: grid;
@@ -257,6 +259,23 @@ h1, h2, h3 {
 .logo:hover .logo-mark { transform: rotate(-8deg) scale(1.06); background: var(--accent); color: var(--accent-ink); }
 .logo-text { font-family: var(--font-display); font-size: 1.16rem; letter-spacing: -0.01em; }
 .logo-text em { color: var(--accent); }
+
+.beta-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  white-space: nowrap;
+  cursor: default;
+}
 
 .nav-links { display: flex; align-items: center; gap: 4px; }
 .nav-link {
@@ -493,8 +512,7 @@ h1, h2, h3 {
 
 .section-head { margin-bottom: clamp(44px, 6vw, 72px); }
 .section-head h2,
-.about-text h2,
-.contact-info h2 { font-size: clamp(2.1rem, 5.2vw, 3.9rem); }
+.about-text h2 { font-size: clamp(2.1rem, 5.2vw, 3.9rem); }
 
 /* ---------- About ---------- */
 
@@ -774,94 +792,100 @@ h1, h2, h3 {
 
 /* ---------- Contact ---------- */
 
-.contact-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-  gap: clamp(40px, 6vw, 80px);
-  align-items: start;
-}
-.contact-info h2 { margin-bottom: 18px; max-width: 14ch; }
-.contact-info > p { color: var(--ink-2); max-width: 44ch; }
-
-.contact-list { margin-top: 32px; display: flex; flex-direction: column; gap: 4px; }
-.contact-list li {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--line-soft);
-  font-size: 0.94rem;
-}
-.contact-list svg { width: 18px; height: 18px; color: var(--accent); flex: 0 0 auto; }
-.contact-list a { transition: color 0.25s var(--ease); }
-.contact-list a:hover { color: var(--accent); }
-
-.contact-form { display: flex; flex-direction: column; gap: 18px; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-.form-group { position: relative; }
-
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 20px 16px 10px;
-  font: inherit;
-  font-size: 0.95rem;
-  color: var(--ink);
+.contact-panel {
+  position: relative;
+  padding: clamp(48px, 7vw, 84px) clamp(28px, 6vw, 72px);
+  border: 1px solid var(--line-soft);
+  border-radius: calc(var(--radius) + 8px);
   background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-  resize: vertical;
-  transition: border-color 0.3s var(--ease), background 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
 }
-.form-group input:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent);
-}
-.form-group label {
+.contact-glow {
   position: absolute;
-  left: 16px;
-  top: 15px;
-  font-size: 0.95rem;
-  color: var(--ink-3);
-  pointer-events: none;
-  transform-origin: left top;
-  transition: transform 0.25s var(--ease), color 0.25s var(--ease);
-}
-.form-group input:focus + label,
-.form-group input:not(:placeholder-shown) + label,
-.form-group textarea:focus + label,
-.form-group textarea:not(:placeholder-shown) + label {
-  transform: translateY(-9px) scale(0.72);
-  color: var(--accent);
-}
-.form-group.invalid input,
-.form-group.invalid textarea { border-color: var(--danger); }
-
-.error-msg {
-  display: block;
-  min-height: 1.1em;
-  margin-top: 5px;
-  font-size: 0.76rem;
-  color: var(--danger);
+  inset: -30% -10%;
+  z-index: -1;
+  background:
+    radial-gradient(32rem 24rem at 12% 8%, var(--glow-1), transparent 65%),
+    radial-gradient(28rem 22rem at 92% 96%, var(--glow-2), transparent 65%);
+  filter: blur(20px);
+  opacity: 0.9;
 }
 
-.contact-form .btn { align-self: flex-start; }
+.contact-head { max-width: 46ch; }
+.contact-head h2 { font-size: clamp(2rem, 4.6vw, 3.2rem); margin-bottom: 18px; }
+.contact-head p { color: var(--ink-2); font-size: clamp(1rem, 0.96rem + 0.2vw, 1.12rem); }
 
-.form-success {
+/* Just two ways to reach her, so let them carry the section. */
+.contact-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: clamp(36px, 5vw, 52px);
+}
+.contact-list li > a {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 0.88rem;
-  color: var(--accent-2);
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
-  pointer-events: none;
+  gap: 18px;
+  height: 100%;
+  padding: 24px 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-solid);
+  transition: transform 0.45s var(--ease), border-color 0.4s var(--ease), box-shadow 0.45s var(--ease);
 }
-.form-success.show { opacity: 1; transform: none; }
-.form-success svg { width: 18px; height: 18px; flex: 0 0 auto; }
+.contact-list li > a:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  box-shadow: var(--shadow-md);
+}
+.contact-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  transition: background 0.35s var(--ease), color 0.35s var(--ease);
+}
+.contact-icon svg { width: 22px; height: 22px; }
+.contact-list li > a:hover .contact-icon { background: var(--accent); color: var(--accent-ink); }
+
+.contact-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.contact-text b {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.contact-text span {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  line-height: 1.2;
+  word-break: break-word;
+  color: var(--ink);
+}
+
+.contact-list .go {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  color: var(--ink-3);
+  transition: transform 0.35s var(--ease), color 0.3s var(--ease);
+}
+.contact-list li > a:hover .go { color: var(--accent); transform: translate(3px, -3px); }
 
 /* =========================================================
    Footer + back to top
@@ -932,7 +956,6 @@ footer {
   .about-grid { grid-template-columns: 1fr; }
   .about-aside { position: static; display: grid; grid-template-columns: 200px 1fr; gap: 28px; align-items: center; }
   .fact-list { margin-top: 0; }
-  .contact-grid { grid-template-columns: 1fr; }
   .hero-bottom { grid-template-columns: 1fr; align-items: start; }
 }
 
@@ -982,7 +1005,6 @@ footer {
   .back-to-top svg { width: 16px; height: 16px; }
   .work { grid-template-columns: 1fr; gap: 0; }
   .work-index { padding-top: 0; margin-bottom: 6px; }
-  .form-row { grid-template-columns: 1fr; }
   .press-card { padding: 30px 26px 26px; }
 }
 
@@ -1012,6 +1034,13 @@ footer {
     border-color: var(--line-soft);
     box-shadow: none;
   }
+  .contact-list li > a:hover {
+    transform: none;
+    border-color: var(--line);
+    box-shadow: none;
+  }
+  .contact-list li > a:hover .contact-icon { background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent); }
+  .contact-list li > a:hover .go { color: var(--ink-3); transform: none; }
   .programme-list li:hover { background: var(--bg); }
   .photo-frame:hover .photo { transform: scale(1.001); }
 
@@ -1036,24 +1065,16 @@ footer {
 
 /* Phones: touch ergonomics for the press links and contact form. */
 @media (max-width: 560px) {
-  /* iOS Safari force-zooms the page when a focused field is under 16px.
-     16px keeps the layout still when someone taps into the form. */
-  .form-group input,
-  .form-group textarea,
-  .form-group label { font-size: 16px; }
-
-  /* 30px and 25px links are awkward to hit — grow them to a thumb. */
+  /* 30px links are awkward to hit — grow them to a thumb. */
   .link-arrow {
     min-height: 44px;
     padding-top: 0;
   }
-  .contact-list li { padding: 2px 0; }
-  .contact-list li > a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 46px;
-  }
-  .contact-list li > span { padding-block: 12px; }
+  .contact-panel { padding: 40px 22px; }
+  .contact-list { grid-template-columns: 1fr; }
+  .contact-list li > a { gap: 14px; padding: 20px 18px; }
+  .contact-icon { width: 42px; height: 42px; }
+  .contact-icon svg { width: 19px; height: 19px; }
 
   /* The fixed back-to-top button was covering the copyright line. */
   .footer-inner {

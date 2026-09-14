@@ -150,58 +150,6 @@
     });
   }
 
-  /* ---------- Contact form ---------- */
-
-  const form = $('#contact-form');
-  const success = $('#form-success');
-
-  const validators = {
-    name: (v) => v.trim().length >= 2 || 'Please enter your name (2+ characters).',
-    email: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) || 'Please enter a valid email address.',
-    subject: (v) => v.trim().length >= 3 || 'Subject must be at least 3 characters.',
-    message: (v) => v.trim().length >= 10 || 'Message should be at least 10 characters.'
-  };
-
-  const validateField = (name) => {
-    const field = $(`#${name}`);
-    const result = validators[name](field.value || '');
-    const group = field.closest('.form-group');
-    const error = $(`#${name}-error`);
-    const ok = result === true;
-
-    group.classList.toggle('invalid', !ok);
-    field.setAttribute('aria-invalid', String(!ok));
-    error.textContent = ok ? '' : result;
-    return ok;
-  };
-
-  $$('#contact-form input, #contact-form textarea').forEach((field) => {
-    field.addEventListener('blur', () => validateField(field.id));
-    field.addEventListener('input', () => {
-      if (field.closest('.form-group').classList.contains('invalid')) validateField(field.id);
-    });
-  });
-
-  let successTimer;
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const allValid = Object.keys(validators).map(validateField).every(Boolean);
-
-    if (!allValid) {
-      success.classList.remove('show');
-      $('#contact-form .invalid input, #contact-form .invalid textarea')?.focus();
-      return;
-    }
-
-    form.reset();
-    $$('.form-group').forEach((g) => g.classList.remove('invalid'));
-    $$('#contact-form [aria-invalid]').forEach((f) => f.removeAttribute('aria-invalid'));
-    success.classList.add('show');
-    clearTimeout(successTimer);
-    successTimer = setTimeout(() => success.classList.remove('show'), 6000);
-  });
-
   /* ---------- Footer year ---------- */
 
   $('#year').textContent = new Date().getFullYear();

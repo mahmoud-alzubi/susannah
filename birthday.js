@@ -8,14 +8,29 @@
   'use strict';
 
   const overlay = document.getElementById('bday');
+  const replayBtn = document.getElementById('bday-replay');
   if (!overlay) return;
+
+  /* ---------- Retire the gag ----------
+     From this date on, nothing birthday-related shows: no card on load, and
+     no cake button in the nav. Change the date to bring it back next year
+     (month is 0-indexed, so 9 = October). */
+  const RETIRE_ON = new Date(2026, 9, 1, 0, 0, 0);   // 1 October 2026, local time
+
+  if (new Date() >= RETIRE_ON) {
+    overlay.remove();
+    replayBtn?.remove();
+    return;
+  }
+
+  replayBtn?.removeAttribute('hidden');   // only shown while the gag is live
 
   const card = overlay.querySelector('.bday-card');
   const cake = overlay.querySelector('.bday-cake');
   const hint = overlay.querySelector('.bday-hint');
   const closeBtn = overlay.querySelector('.bday-close');
   const fruitLayer = overlay.querySelector('.bday-fruit');
-  const replay = document.getElementById('bday-replay');
+  const replay = replayBtn;
 
   const FRUIT = ['🍇', '🍊', '🍋', '🍑', '🍒', '🍓', '🥝', '🍍', '🍎', '🍐', '🥭', '🍌'];
   // Pomegranates are the favourite, so they fall more often than anything else.
