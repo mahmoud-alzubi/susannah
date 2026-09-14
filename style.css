@@ -373,7 +373,15 @@ h1, h2, h3 {
   letter-spacing: -0.035em;
 }
 .hero-title em { color: var(--accent); }
-.hero-title .line { display: block; overflow: hidden; padding-bottom: 0.06em; }
+/* padding-left/margin-left cancel out visually but give the first glyph's
+   ink (serif "S", italic "A") room so overflow:hidden doesn't clip it. */
+.hero-title .line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+  padding-left: 0.06em;
+  margin-left: -0.06em;
+}
 .hero-title .line-in {
   display: block;
   transform: translateY(105%);
@@ -382,20 +390,28 @@ h1, h2, h3 {
 .hero-title .line:nth-child(2) .line-in { animation-delay: 0.12s; }
 @keyframes line-up { to { transform: translateY(0); } }
 
-.hero-bottom {
+/* Asymmetric split: big title + CTA on the left, a slim rail of
+   description + credentials on the right, divided by a vertical rule. */
+.hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 40px;
+  grid-template-columns: minmax(0, 1fr) minmax(230px, 300px);
+  gap: clamp(32px, 6vw, 72px);
   align-items: end;
-  padding-top: 22px;
-  border-top: 1px solid var(--line-soft);
+}
+
+.hero-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  padding-left: clamp(22px, 2.6vw, 36px);
+  padding-bottom: 6px;
+  border-left: 1px solid var(--line-soft);
 }
 .hero-desc {
-  max-width: 52ch;
   color: var(--ink-2);
-  font-size: clamp(1.02rem, 0.95rem + 0.4vw, 1.22rem);
+  font-size: clamp(1rem, 0.94rem + 0.3vw, 1.14rem);
 }
-.hero-side { display: flex; gap: 36px; }
+.hero-side { display: flex; flex-direction: column; gap: 18px; }
 .stat b {
   display: block;
   font-family: var(--font-display);
@@ -941,7 +957,13 @@ footer {
   .about-grid { grid-template-columns: 1fr; }
   .about-aside { position: static; display: grid; grid-template-columns: 200px 1fr; gap: 28px; align-items: center; }
   .fact-list { margin-top: 0; }
-  .hero-bottom { grid-template-columns: 1fr; align-items: start; }
+  .hero-grid { grid-template-columns: 1fr; align-items: start; }
+  .hero-aside {
+    border-left: 0;
+    padding-left: 0;
+    padding-top: 22px;
+    border-top: 1px solid var(--line-soft);
+  }
 }
 
 @media (max-width: 760px) {
@@ -971,8 +993,6 @@ footer {
   .nav-links .nav-link { font-family: var(--font-display); font-size: 1.9rem; padding: 8px 0; }
   .nav-links .nav-link.active { background: none; color: var(--accent); }
 
-  .hero-side { flex-direction: row; gap: 28px; }
-
   /* Side-by-side portrait + facts no longer fits: stack them. */
   .about-aside { grid-template-columns: 1fr; gap: 24px; align-items: start; }
   /* Portrait, not hero image: keep it to roughly half the column. */
@@ -994,7 +1014,6 @@ footer {
 }
 
 @media (max-width: 420px) {
-  .hero-side { flex-direction: column; gap: 18px; }
   .btn { padding: 14px 22px; }
 }
 
